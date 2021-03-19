@@ -25,11 +25,6 @@ class UserCommands(commands.Cog):
 			if not self.users.is_defined(msg):
 				await self.users.create_user(msg)
 		return
-
-	@commands.Cog.listener()
-	async def on_command_error(self, ctx, error):
-		print("{} was invoked incorrectly !".format(ctx.command.name))
-		print(error) 
 			
 	@commands.command(name='json')
 	async def json(self, ctx):

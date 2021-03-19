@@ -7,8 +7,8 @@ class AdminCommands(commands.Cog):
 		self.bot = bot
 		self.admins = os.getenv('ADMIN').split(",")
 
-		async def cog_check(self, ctx):
-			return ctx.author.id in self.admins
+	async def cog_check(self, ctx):
+		return ctx.author.id in self.admins
 
 	
 def setup(bot):
