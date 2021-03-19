@@ -1,11 +1,31 @@
 # Installation
 
+Créer 
+```bash
+git clone https://github.com/ClementBonnoron/MineGame.git
+```
+  
+Installer Python3 : [https://www.python.org/downloads](https://www.python.org/downloads)  
+  
+Installer discord.py :  
+```bash
+python3 -m pip install -U discord.py
+```
+  
+Lancer le bot :
+```bash
+python3 main.py
+```
+
+# Initialisation
+
 Il est nécessaire de modifier le .env permettant de stocker les informations personnelles du bot : 
 
 TOKEN correspond à l'identifiant du bot. Vous pouvez le récupérer sur la page de [développeur discord] (https://discord.com/developers/applications).  
 AUTHOR_ID correspond à l'identifiant du propriétaire du serveur  
 ADMIN est une liste d'identifiant séparé par des virgules contenant la liste des identifiants administrateurs.  
 BOT_ID correspond à l'identifiant du bot.  
+
 
 # .env
 
