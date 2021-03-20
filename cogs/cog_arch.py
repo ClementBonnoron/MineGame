@@ -8,8 +8,8 @@ class ArchCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(name='tmp')
-    async def tmp(self, ctx, passwd=None, arg1=None, arg2=None, fend_name=None):
+    @commands.command(name='saveimgs')
+    async def saveimgs(self, ctx, passwd=None, arg1=None, arg2=None, fend_name=None):
         if passwd is None or str(passwd) != "yesiwanttosaveallfiles":
             await ctx.message.channel.send("Password is not correct !")
             return
@@ -47,7 +47,7 @@ class ArchCommands(commands.Cog):
                                 new_name = entry.created_at.strftime("%Y%m%d%H%M%S") + \
                                     "__" + entry.author.name + \
                                     "__" + attachment.filename
-                                print(new_name)
+                                print("saving : '" + new_name + "'")
                                 await attachment.save("./imgs/" + new_name)
                                 myzip.write("./imgs/" + new_name)
                                 os.remove("./imgs/" + new_name)

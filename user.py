@@ -1,6 +1,6 @@
 from content import Blocks, Access
 import random as rd
-from datetime import date
+from datetime import datetime
 import json
 
 class UserData:
@@ -15,7 +15,7 @@ class UserData:
 		self.id = id
 		self.access = UserData.default_access
 		self.money = UserData.default_money
-		self.date_joined = date.today().strftime("%d/%m/%Y, %H:%M:%S")
+		self.date_joined = datetime.now().strftime("%d/%m/%Y, %H:%M")
 		self.display_messages_mining = False
 		for key in Blocks.__members__.keys():
 			self.data[key] = 0
@@ -149,15 +149,9 @@ class Users:
 		json_object = json.dumps(data, indent=2)
 		with open(filename, 'w') as outfile: 
 			outfile.write(json_object) 
-		print("fichier enregistré")
 
-	def loadData(filename):
-		with open(filename, 'r') as openfile: 
-
-			data = json.load(openfile)
-			print(data)
-			print(type(data))
-			return Users.decodeJson(data)
+	def dropUsers(self):
+		self.data.clear()
 
 	def toJson(self):
 		struct = {}
@@ -174,6 +168,11 @@ class Users:
 			data["data"] = blocks
 			struct[str(user.id)] = data
 		return struct
+
+	def loadData(filename):
+		with open(filename, 'r') as openfile: 
+			data = json.load(openfile)
+			return Users.decodeJson(data)
 
 	def decodeJson(obj):
 		users = Users()

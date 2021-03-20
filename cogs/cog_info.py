@@ -10,7 +10,6 @@ class InfoCommands(commands.Cog):
 
 	@commands.command(name='help')
 	async def help(self, ctx):
-		
 		msg = MessageData(ctx.message)
 
 		answer = "&profil                                        --> Display your profil\n"

@@ -58,7 +58,6 @@ class Access(bytes, Enum):
 			return Access.MINE
 		elif access == Access.MINE:
 			return Access.UNDERGROUND
-
 	
 	def get_blocks_from_access(self):
 		access_blocks = {
@@ -76,12 +75,3 @@ class Access(bytes, Enum):
 				]
 		}
 		return access_blocks[self.name]
-
-
-
-
-def print_content():
-	print(Blocks.__members__.keys())
-	print(Blocks.from_name('WOOD').proba)
-	print(Access.__members__.keys())
-	print(Access.from_name('UNDERGROUND').cost)

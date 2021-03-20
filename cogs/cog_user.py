@@ -6,7 +6,7 @@ from discord.ext import commands
 from message import MessageData, send_message_error_access, get_embed_message
 from content import Access
 from user import Users
-from datetime import date
+from datetime import date, datetime
 from json import dumps
 
 class UserCommands(commands.Cog):
@@ -14,9 +14,6 @@ class UserCommands(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 		self.users = Users.loadData(os.getenv('FILE_USERS'))
-
-	def print(self, txt):
-		print(txt)
 
 	@commands.Cog.listener()
 	async def on_command_completion(self, ctx):
@@ -34,7 +31,6 @@ class UserCommands(commands.Cog):
 	async def profile(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant : {}".format(msg.aid))
 			return
 			
 		data = self.users.user_profil(msg)
@@ -50,7 +46,7 @@ class UserCommands(commands.Cog):
 		for name, count in blocks.items():
 			answer += "\t{}: {}\n".format(name.capitalize(), count)
 		embed.add_field(name="Données", value=answer, inline=False)
-		embed.set_footer(text="{} - {}".format(msg.aname, date.today().strftime("%d/%m/%Y, %H:%M:%S")))
+		embed.set_footer(text="{} - {}".format(msg.aname, datetime.now().strftime("%d/%m/%Y")))
 
 		await msg.channel.send(embed=embed)
 		return
@@ -59,7 +55,6 @@ class UserCommands(commands.Cog):
 	async def place(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant")
 			return
 
 		embed=discord.Embed(title="Place", url="https://realdrewdata.medium.com/", description="Current place : {}".format(self.users.get_user(msg).access.name.capitalize()), color=0xFF5733)
@@ -70,7 +65,6 @@ class UserCommands(commands.Cog):
 	async def update(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant")
 			return
 		
 		if msg.argc == 3 and msg.param[0] == 'message' and bool(msg.param[1]):
@@ -83,7 +77,6 @@ class UserCommands(commands.Cog):
 	async def upgrade(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant")
 			return
 
 		await msg.channel.send(self.users.user_update_place(msg))
@@ -95,7 +88,6 @@ class UserCommands(commands.Cog):
 	async def mine(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant")
 			return
 
 		if msg.argc == 2:
@@ -123,7 +115,6 @@ class UserCommands(commands.Cog):
 	async def sell(self, ctx):
 		msg = MessageData(ctx.message)
 		if not self.users.is_defined(msg):
-			print("Perso non existant")
 			return
 
 		if msg.argc == 3:
